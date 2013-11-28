@@ -11,10 +11,13 @@ var config        = require('./server/config'),
     models        = require('./server/models'),
     permissions   = require('./server/permissions'),
     uuid          = require('node-uuid'),
+    Showdown      = require('showdown'),
+    github        = require('./shared/vendor/showdown/extensions/github'),
 
 // Variables
     Ghost,
-    instance;
+    instance,
+    converter = new Showdown.converter({extensions: [github]});
 
 // ## Module Methods
 /**
@@ -56,7 +59,7 @@ Ghost = function () {
                     url: config().url.replace(/\/$/, ''),
                     path: localPath,
                     title: instance.settings('title'),
-                    description: instance.settings('description'),
+                    description: converter.makeHtml(instance.settings('description')),
                     logo: instance.settings('logo'),
                     cover: instance.settings('cover')
                 };
