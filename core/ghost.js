@@ -25,6 +25,7 @@ var config        = require('./server/config'),
  * @returns {*}
  * @constructor
  */
+
 Ghost = function () {
 
     if (!instance) {
@@ -47,6 +48,7 @@ Ghost = function () {
             dataProvider: models,
             blogGlobals:  function () {
                 var localPath = url.parse(config().url).path;
+                var descriptionHtml = converter.makeHtml(instance.settings('description'));
 
                 // Remove trailing slash
                 if (localPath !== '/') {
@@ -59,7 +61,7 @@ Ghost = function () {
                     url: config().url.replace(/\/$/, ''),
                     path: localPath,
                     title: instance.settings('title'),
-                    description: converter.makeHtml(instance.settings('description')),
+                    description: descriptionHtml,
                     logo: instance.settings('logo'),
                     cover: instance.settings('cover')
                 };

@@ -183,6 +183,20 @@ coreHelpers.tags = function (options) {
     return output;
 };
 
+//
+// ### Safe Html Helper
+//
+// *Usage example:*
+// `{{descriptionHtml}}`
+//
+// Returns markdown blog description 
+//
+coreHelpers.descriptionHtml = function() {
+    /*jslint unparam:true*/
+    var description = coreHelpers.ghost.blogGlobals().description;
+    return new hbs.handlebars.SafeString(description);
+}
+
 // ### Content Helper
 //
 // *Usage example:*
@@ -407,6 +421,11 @@ coreHelpers.meta_description = function (options) {
         }
     }
 
+    /*jslint regexp:true */
+    description = description.replace(/<\/?[^>]+>/gi, '');
+    description = description.replace(/(\r\n|\n|\r)+/gm, ' ');
+    /*jslint regexp:false */
+
     return filters.doFilter('meta_description', description).then(function (description) {
         description = description || "";
         return new hbs.handlebars.SafeString(description.trim());
@@ -598,6 +617,8 @@ registerHelpers = function (ghost, config) {
     registerThemeHelper('content', coreHelpers.content);
 
     registerThemeHelper('date', coreHelpers.date);
+    
+    registerThemeHelper('descriptionHtml', coreHelpers.descriptionHtml);
 
     registerThemeHelper('e', coreHelpers.e);
 
