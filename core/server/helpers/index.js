@@ -184,18 +184,18 @@ coreHelpers.tags = function (options) {
 };
 
 //
-// ### Safe Html Helper
+// ### Blog Description Html Helper
 //
 // *Usage example:*
 // `{{descriptionHtml}}`
 //
 // Returns markdown blog description 
 //
-coreHelpers.descriptionHtml = function() {
+coreHelpers.descriptionHtml = function () {
     /*jslint unparam:true*/
     var description = coreHelpers.ghost.blogGlobals().description;
     return new hbs.handlebars.SafeString(description);
-}
+};
 
 // ### Content Helper
 //
@@ -617,7 +617,7 @@ registerHelpers = function (ghost, config) {
     registerThemeHelper('content', coreHelpers.content);
 
     registerThemeHelper('date', coreHelpers.date);
-    
+
     registerThemeHelper('descriptionHtml', coreHelpers.descriptionHtml);
 
     registerThemeHelper('e', coreHelpers.e);

@@ -47,8 +47,8 @@ Ghost = function () {
             },
             dataProvider: models,
             blogGlobals:  function () {
-                var localPath = url.parse(config().url).path;
-                var descriptionHtml = converter.makeHtml(instance.settings('description'));
+                var localPath = url.parse(config().url).path,
+                    descriptionHtml = converter.makeHtml(instance.settings('description'));
 
                 // Remove trailing slash
                 if (localPath !== '/') {
