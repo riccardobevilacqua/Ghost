@@ -183,20 +183,6 @@ coreHelpers.tags = function (options) {
     return output;
 };
 
-//
-// ### Blog Description Html Helper
-//
-// *Usage example:*
-// `{{descriptionHtml}}`
-//
-// Returns markdown blog description 
-//
-coreHelpers.descriptionHtml = function () {
-    /*jslint unparam:true*/
-    var description = coreHelpers.ghost.blogGlobals().description;
-    return new hbs.handlebars.SafeString(description);
-};
-
 // ### Content Helper
 //
 // *Usage example:*
@@ -457,6 +443,19 @@ coreHelpers.json = function (object, options) {
     return JSON.stringify(object);
 };
 
+//
+// ### Html Helper
+//
+// *Usage example:*
+// `{{html object}}`
+//
+// **returns** SafeString html.
+//
+coreHelpers.html = function (object) {
+    /*jslint unparam:true*/
+    return new hbs.handlebars.SafeString(object);
+};
+
 coreHelpers.foreach = function (context, options) {
     var fn = options.fn,
         inverse = options.inverse,
@@ -618,8 +617,6 @@ registerHelpers = function (ghost, config) {
 
     registerThemeHelper('date', coreHelpers.date);
 
-    registerThemeHelper('descriptionHtml', coreHelpers.descriptionHtml);
-
     registerThemeHelper('e', coreHelpers.e);
 
     registerThemeHelper('encode', coreHelpers.encode);
@@ -635,6 +632,8 @@ registerHelpers = function (ghost, config) {
     registerThemeHelper('has_tag', coreHelpers.has_tag);
 
     registerThemeHelper('helperMissing', coreHelpers.helperMissing);
+
+    registerThemeHelper('html', coreHelpers.html);
 
     registerThemeHelper('json', coreHelpers.json);
 
